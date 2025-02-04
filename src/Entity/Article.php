@@ -41,7 +41,9 @@ class Article
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank]
+    #[Assert\NotBlank(
+//        message: 'Not Blank',
+    )]
     #[Assert\Length(min: 5, max: 255)]
     #[ApiProperty(description: "The title of the article")]
     private ?string $title = null;
