@@ -10,15 +10,21 @@ use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
 use App\Repository\ArticleRepository;
+use App\State\CustomGetCollectionProvider;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 #[Get()]
-#[GetCollection(uriTemplate: '/getarticle', name: 'getarticle')]
-#[GetCollection(uriTemplate: '/getarticle2', name: 'getarticle2')]
-#[GetCollection()]
+//#[GetCollection(uriTemplate: '/getarticle', name: 'getarticle')]
+#[GetCollection(
+    uriTemplate: '/getarticle2',
+    name: 'getarticle2',
+    filters: ['article.search_filter'],
+    provider: CustomGetCollectionProvider::class
+)]
+//#[GetCollection()]
 #[Post()]
 #[Put()]
 #[Patch()]
