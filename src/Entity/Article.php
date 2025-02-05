@@ -16,18 +16,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 #[Get()]
-#[GetCollection(
-//    paginationEnabled: true,
-//    paginationItemsPerPage: 20,
-//    paginationClientEnabled: true,
-//    paginationClientItemsPerPage: true,
-    uriTemplate: '/getarticle',
-    name: 'getarticle',
-)]
-#[GetCollection(
-    uriTemplate: '/getarticle2',
-    name: 'getarticle2',
-)]
+#[GetCollection(uriTemplate: '/getarticle', name: 'getarticle')]
+#[GetCollection(uriTemplate: '/getarticle2', name: 'getarticle2')]
 #[GetCollection()]
 #[Post()]
 #[Put()]
@@ -41,9 +31,7 @@ class Article
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(
-//        message: 'Not Blank',
-    )]
+    #[Assert\NotBlank]
     #[Assert\Length(min: 5, max: 255)]
     #[ApiProperty(description: "The title of the article")]
     private ?string $title = null;
@@ -55,14 +43,6 @@ class Article
 
     #[ORM\Column]
     private ?\DateTimeImmutable $publishedAt = null;
-
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank]
-    private ?string $no = null;
-
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank]
-    private ?string $q = null;
 
     public function getId(): ?int
     {
@@ -77,7 +57,6 @@ class Article
     public function setTitle(string $title): static
     {
         $this->title = $title;
-
         return $this;
     }
 
@@ -89,7 +68,6 @@ class Article
     public function setContent(string $content): static
     {
         $this->content = $content;
-
         return $this;
     }
 
@@ -101,31 +79,6 @@ class Article
     public function setPublishedAt(\DateTimeImmutable $publishedAt): static
     {
         $this->publishedAt = $publishedAt;
-
-        return $this;
-    }
-
-    public function getNo(): ?string
-    {
-        return $this->no;
-    }
-
-    public function setNo(string $no): static
-    {
-        $this->no = $no;
-
-        return $this;
-    }
-
-    public function getQ(): ?string
-    {
-        return $this->q;
-    }
-
-    public function setQ(string $q): static
-    {
-        $this->q = $q;
-
         return $this;
     }
 
