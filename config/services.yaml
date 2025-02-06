@@ -27,3 +27,8 @@ services:
         arguments:
             $providerInterface: '@api_platform.doctrine.orm.state.collection_provider'
         tags: ['api_platform.state_provider']
+
+    App\State\InsertUserProcessor:
+        arguments:
+            $processorInterface: '@api_platform.doctrine.orm.state.persist_processor'
+        tags: [ 'api_platform.state_processor' ]

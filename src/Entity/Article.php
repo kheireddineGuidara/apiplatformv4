@@ -24,6 +24,13 @@ use Symfony\Component\Validator\Constraints as Assert;
     filters: ['article.search_filter'],
     provider: CustomGetCollectionProvider::class
 )]
+
+#[GetCollection(
+    uriTemplate: '/articleAuthor',
+    name: 'articleAuthor',
+    filters: ['article.search_filter'],
+    provider: CustomGetCollectionProvider::class
+)]
 //#[GetCollection()]
 #[Post()]
 #[Put()]
@@ -49,6 +56,9 @@ class Article
 
     #[ORM\Column]
     private ?\DateTimeImmutable $publishedAt = null;
+
+    #[ORM\ManyToOne(inversedBy: 'article')]
+    private ?Author $author = null;
 
     public function getId(): ?int
     {
@@ -92,5 +102,17 @@ class Article
     public function setPublishedAtValue(): void
     {
         $this->publishedAt = new \DateTimeImmutable();
+    }
+
+    public function getAuthor(): ?Author
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?Author $author): static
+    {
+        $this->author = $author;
+
+        return $this;
     }
 }
