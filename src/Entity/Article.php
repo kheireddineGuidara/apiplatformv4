@@ -9,7 +9,11 @@ use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
+use App\Dto\ArticleAuthorRequestDto;
+use App\Dto\ArticleAuthorResponseDto;
 use App\Repository\ArticleRepository;
+use App\State\ArticleAuthorStateProvider;
+use App\State\ArticleAuthStateProcessor;
 use App\State\CustomGetCollectionProvider;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -29,9 +33,16 @@ use Symfony\Component\Validator\Constraints as Assert;
     uriTemplate: '/articleAuthor',
     name: 'articleAuthor',
     filters: ['article.search_filter'],
-    provider: CustomGetCollectionProvider::class
+    provider: ArticleAuthorStateProvider::class,
+    output: ArticleAuthorResponseDto::class
 )]
 //#[GetCollection()]
+#[Post(
+    uriTemplate: '/articleAuthor',
+    name: 'articleAuthorPost',
+    processor: ArticleAuthStateProcessor::class,
+    input: ArticleAuthorRequestDto::class
+)]
 #[Post()]
 #[Put()]
 #[Patch()]
