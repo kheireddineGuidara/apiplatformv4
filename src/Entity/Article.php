@@ -28,7 +28,6 @@ use Symfony\Component\Validator\Constraints as Assert;
     filters: ['article.search_filter'],
     provider: CustomGetCollectionProvider::class
 )]
-
 #[GetCollection(
     uriTemplate: '/articleAuthor',
     name: 'articleAuthor',

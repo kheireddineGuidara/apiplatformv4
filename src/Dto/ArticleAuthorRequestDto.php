@@ -1,8 +1,15 @@
 <?php
 
 namespace App\Dto;
+use Symfony\Component\Validator\Constraints as Assert;
 class ArticleAuthorRequestDto
 {
+    #[Assert\Length(
+        min: 3,
+        max: 10,
+        minMessage: 'Your first name at least {{ limit }} characters.',
+        maxMessage: 'Your first name at most {{ limit }} characters.'
+    )]
     private ?string $title=null;
     private ?string $content=null;
     private ?string $firstName=null;
