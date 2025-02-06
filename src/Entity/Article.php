@@ -41,7 +41,8 @@ use Symfony\Component\Validator\Constraints as Assert;
     uriTemplate: '/articleAuthor',
     name: 'articleAuthorPost',
     processor: ArticleAuthStateProcessor::class,
-    input: ArticleAuthorRequestDto::class
+    input: ArticleAuthorRequestDto::class,
+    output: ArticleAuthorResponseDto::class
 )]
 #[Post()]
 #[Put()]

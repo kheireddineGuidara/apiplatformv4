@@ -4,6 +4,7 @@ namespace App\State;
 
 use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
+use App\Dto\ArticleAuthorResponseDto;
 use App\Entity\Article;
 use App\Entity\Author;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,7 +15,7 @@ class ArticleAuthStateProcessor implements ProcessorInterface
     {
     }
 
-    public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = []): void
+    public function process(mixed $data, Operation $operation, array $uriVariables = [], array $context = []): object
     {
         $author = new Author();
         $author->setFirstName($data->getFirstName());
@@ -30,5 +31,11 @@ class ArticleAuthStateProcessor implements ProcessorInterface
         $this->entityManager->persist($article);
 
         $this->entityManager->flush();
+
+        $articleDto = new ArticleAuthorResponseDto();
+        $articleDto->setTitle($data->getTitle());
+        $articleDto->setAuthor($data->getFirstName().' '.$data->getLastNAme());
+
+        return $articleDto;
     }
 }
