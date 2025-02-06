@@ -18,6 +18,9 @@ class Author
     #[ORM\Column(length: 255)]
     private ?string $firstName = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $lastName = null;
+
     /**
      * @var Collection<int, Article>
      */
@@ -42,7 +45,17 @@ class Author
     public function setFirstName(string $firstName): static
     {
         $this->firstName = $firstName;
+        return $this;
+    }
 
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    public function setLastName(string $lastName): static
+    {
+        $this->lastName = $lastName;
         return $this;
     }
 
