@@ -9,3 +9,8 @@ api_platform:
         cache_headers:
             vary: ['Content-Type', 'Authorization', 'Origin']
         pagination_enabled: false
+    swagger:
+        api_keys:
+            JWT:
+                name: Authorization
+                type: header

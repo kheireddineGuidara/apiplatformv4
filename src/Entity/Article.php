@@ -33,7 +33,8 @@ use Symfony\Component\Validator\Constraints as Assert;
     name: 'articleAuthor',
     filters: ['article.search_filter'],
     provider: ArticleAuthorStateProvider::class,
-    output: ArticleAuthorResponseDto::class
+    output: ArticleAuthorResponseDto::class,
+    security: "is_granted('ROLE_USER')"
 )]
 //#[GetCollection()]
 #[Post(
